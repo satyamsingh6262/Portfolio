@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satyam Singh | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+        .section-title {
+            position: relative;
+            display: inline-block;
+            font-size: 2.25rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 2.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50%;
+            height: 4px;
+            background-color: #58a6ff;
+            border-radius: 9999px;
+            transition: width 0.3s ease-in-out;
+        }
+        .section-title:hover::after {
+            width: 100%;
+        }
+
+        /* Fade-in animation for sections */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover effect for cards */
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="sticky top-0 z-50 bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white hover:text-blue-400 transition-colors duration-300">Satyam Singh</a>
+            <div class="space-x-4 hidden md:flex">
+                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Projects</a>
+                <a href="#education" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Education</a>
+                <a href="#certifications" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Certifications</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-blue-400 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 p-4">
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Projects</a>
+                <a href="#education" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Education</a>
+                <a href="#certifications" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Certifications</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gray-900 text-white py-16 md:py-24" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.105), rgba(0, 0, 0));">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white">Satyam Singh</h1>
+                <p class="mt-2 text-xl md:text-2xl text-blue-300">Aspiring Java Developer Intern</p>
+                <p class="mt-4 text-lg text-gray-400 max-w-xl">
+                    Passionate about building scalable, maintainable software solutions with a strong foundation in back-end development and a desire to learn new technologies.
+                </p>
+                <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
+                    <a href="https://www.linkedin.com/in/satyam-singh-213777301/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center">
+                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/satyamsingh6262" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center">
+                        <i class="fab fa-github mr-2"></i> GitHub
+                    </a>
+                    <a href="Resume.pdf" download class="bg-gray-700 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center">
+                        <i class="fa fa-file mr-2"></i> Resume
+                    </a>
+                </div>
+            </div>
+            <div class="w-40 h-40 md:w-48 md:h-48 flex-shrink-0 rounded-full overflow-hidden border-4 border-blue-600 shadow-xl transform transition-transform duration-300 hover:scale-110">
+                <img src="Profile_photo.jpg" alt="Profile Picture" class="w-full h-full object-cover">
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 md:py-24 space-y-24">
+
+        <section id="about" class="fade-in">
+            <div class="bg-gray-800 p-8 md:p-12 rounded-xl shadow-lg transition-transform duration-300 card">
+                <h2 class="section-title">About Me</h2>
+                <p class="text-lg leading-relaxed text-gray-300">
+                    I'm an aspiring Java Developer Intern with strong programming skills in Java, object-oriented design, and back-end development. I have hands-on experience building software systems, REST APIs, and working with databases. I am passionate about building scalable, maintainable software solutions and am committed to learning and growing my skills.
+                </p>
+            </div>
+        </section>
+
+        <section id="skills" class="fade-in">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="bg-gray-800 p-8 md:p-12 rounded-xl shadow-lg">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">Languages</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">Java, Python, JavaScript, SQL, HTML/CSS</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">Libraries</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn, React (basic)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">Tools & Platforms</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">Git, Docker, VS Code, PowerBI, Tableau, Excel, Google BigQuery (basic)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">Databases</h3>
+                        <ul class="space-y-2">
+                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">MySQL, PostgreSQL</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="fade-in">
+            <h2 class="section-title">Project Experience</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300 transform card">
+                    <h3 class="text-xl font-bold text-blue-400">Library Management System</h3>
+                    <p class="mt-2 text-gray-400">Java + MySQL</p>
+                    <p class="mt-4 text-gray-300">
+                        A full-stack application for managing library inventory and transactions. Implemented CRUD operations using JDBC and MySQL, and created a GUI using Swing.
+                    </p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300 transform card">
+                    <h3 class="text-xl font-bold text-blue-400">E-Commerce Website Backend</h3>
+                    <p class="mt-2 text-gray-400">Spring Boot</p>
+                    <p class="mt-4 text-gray-300">
+                        Developed a RESTful API for product, user, and order management using Spring Boot. Utilized Hibernate for ORM and MySQL for persistent storage.
+                    </p>
+                </div>
+                <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300 transform card">
+                    <h3 class="text-xl font-bold text-blue-400">Smart Fire Detection System</h3>
+                    <p class="mt-2 text-gray-400">Java + IoT</p>
+                    <p class="mt-4 text-gray-300">
+                        Created a real-time alert system using Java for device integration and SMS alerts. Integrated sensors and microcontrollers with backend alert scripts.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="fade-in">
+            <h2 class="section-title">Education</h2>
+            <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-transform duration-300 card">
+                <div class="flex items-start">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-400">Bachelor of Technology in Computer Science & Engineering</h3>
+                        <p class="mt-1 text-lg text-gray-300">Shri Ramswaroop Memorial University, Lucknow</p>
+                        <p class="mt-1 text-gray-400">Aug 2022 - Present</p>
+                        <p class="mt-1 text-gray-400">CGPA: 7.08/10</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="fade-in">
+            <h2 class="section-title">Certifications</h2>
+            <div class="bg-gray-800 p-8 rounded-xl shadow-lg">
+                <ul class="space-y-4">
+                    <li class="bg-gray-700 p-4 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">
+                        <h3 class="text-lg font-bold text-blue-400">Power BI - Microsoft</h3>
+                        <p class="text-gray-400">Issued: Jul 2024</p>
+                    </li>
+                    <li class="bg-gray-700 p-4 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">
+                        <h3 class="text-lg font-bold text-blue-400">Walmart Advanced software engineering Job Simulation</h3>
+                        <p class="text-gray-400">Issued: April 2025</p>
+                    </li>
+                    <li class="bg-gray-700 p-4 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">
+                        <h3 class="text-lg font-bold text-blue-400">Sky Scanner Front-End Software Engineering Job Simulation</h3>
+                        <p class="text-gray-400">Issued: April 2025</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-gray-400 py-8 text-center">
+        <h1 class="text-gray-300 hover:text-blue-400 transition-colors duration-300 hover:scale-110">Feel Free to Contact</h1>
+        <p class="hover:scale-110">Email: satyamsingh62jnp@gmail.com | Phone: +91 7398410701</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // Toggle mobile menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Intersection Observer for fade-in effect on scroll
+        const faders = document.querySelectorAll('.fade-in');
+        const appearOptions = {
+            threshold: 0.2
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('show');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+    </script>
+</body>
+</html>
