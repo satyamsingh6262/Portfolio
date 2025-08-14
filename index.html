@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,222 +8,488 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Using a bold, modern sans-serif for a strong, masculine look -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
+        /* A bold and dynamic black and golden color palette */
+        :root {
+            --bg-color: #000000;
+            --text-color: #f0f0f0;
+            --primary-color: #ffc400; /* More vibrant, fiery gold accent */
+            --secondary-color: #1a1a1a; /* Deeper dark gray */
+            --card-bg: #111111;
+            --shadow-color: rgba(255, 196, 0, 0.4);
         }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        nav,
+        header,
+        main,
+        footer {
+            position: relative;
+            z-index: 10;
+        }
+
         .section-title {
             position: relative;
             display: inline-block;
-            font-size: 2.25rem;
-            font-weight: 800;
-            color: #fff;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
             margin-bottom: 2.5rem;
+            text-transform: uppercase;
         }
+
         .section-title::after {
             content: '';
             position: absolute;
             bottom: -10px;
             left: 0;
-            width: 50%;
+            width: 90px;
             height: 4px;
-            background-color: #58a6ff;
+            background-color: var(--primary-color);
             border-radius: 9999px;
             transition: width 0.3s ease-in-out;
         }
+
         .section-title:hover::after {
-            width: 100%;
+            width: 180px;
         }
 
-        /* Fade-in animation for sections */
-        .fade-in {
+        .fade-in-section {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .fade-in.show {
+
+        .fade-in-section.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Hover effect for cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
         .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px var(--shadow-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .skill-badge {
+            background-color: var(--secondary-color);
+            border: 1px solid #333;
+            color: var(--primary-color);
+            transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .skill-badge:hover {
+            transform: scale(1.1);
+            background-color: #2a2a2a;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .glowing-button {
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .glowing-button:hover {
+            box-shadow: 0 0 15px var(--primary-color), inset 0 0 7px var(--primary-color);
+            color: var(--primary-color);
+            background-color: rgba(255, 196, 0, 0.1);
+        }
+        
+        .glowing-button-primary:hover {
+            background-color: rgba(255, 196, 0, 0.8);
+            color: var(--bg-color);
+        }
+
+        /* Profile image golden glow effect */
+        .glowing-bg {
+            position: relative;
+            z-index: 20;
+        }
+
+        .glowing-bg::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            border-radius: 9999px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            animation: glowing-light 12s linear infinite;
+            z-index: -1;
+        }
+
+        .glowing-bg:hover::before {
+            opacity: 0.7;
+        }
+
+        @keyframes glowing-light {
+            0% {
+                transform: scale(0.95);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(0.95);
+            }
         }
     </style>
 </head>
+
 <body class="antialiased">
 
-    <nav class="sticky top-0 z-50 bg-gray-900 bg-opacity-90 backdrop-filter backdrop-blur-sm shadow-lg">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-white hover:text-blue-400 transition-colors duration-300">Satyam Singh</a>
-            <div class="space-x-4 hidden md:flex">
-                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">About</a>
-                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Skills</a>
-                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Projects</a>
-                <a href="#education" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Education</a>
-                <a href="#certifications" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Certifications</a>
+    <!-- Animated golden particle background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <nav class="sticky top-0 z-50 bg-secondary bg-opacity-90 backdrop-blur-md shadow-2xl border-b-2 border-primary">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-extrabold text-primary transition-colors duration-300" style="font-family: 'Playfair Display', serif;">Satyam Singh</a>
+            <div class="space-x-8 hidden md:flex font-medium">
+                <a href="#about" class="text-text-color hover:text-primary transition-colors duration-300">ABOUT</a>
+                <a href="#skills" class="text-text-color hover:text-primary transition-colors duration-300">SKILLS</a>
+                <a href="#projects" class="text-text-color hover:text-primary transition-colors duration-300">PROJECTS</a>
+                <a href="#education" class="text-text-color hover:text-primary transition-colors duration-300">EDUCATION</a>
+                <a href="#certifications" class="text-text-color hover:text-primary transition-colors duration-300">CERTIFICATIONS</a>
             </div>
-            <button id="mobile-menu-button" class="md:hidden text-gray-300 hover:text-blue-400 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <button id="mobile-menu-button" class="md:hidden text-primary focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                 </svg>
             </button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 p-4">
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary p-4 border-t-2 border-primary">
             <div class="flex flex-col space-y-4">
-                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">About</a>
-                <a href="#skills" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Skills</a>
-                <a href="#projects" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Projects</a>
-                <a href="#education" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Education</a>
-                <a href="#certifications" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Certifications</a>
+                <a href="#about" class="text-text-color hover:text-primary transition-colors duration-300">ABOUT</a>
+                <a href="#skills" class="text-text-color hover:text-primary transition-colors duration-300">SKILLS</a>
+                <a href="#projects" class="text-text-color hover:text-primary transition-colors duration-300">PROJECTS</a>
+                <a href="#education" class="text-text-color hover:text-primary transition-colors duration-300">EDUCATION</a>
+                <a href="#certifications" class="text-text-color hover:text-primary transition-colors duration-300">CERTIFICATIONS</a>
             </div>
         </div>
     </nav>
 
-    <header class="bg-gray-900 text-white py-16 md:py-24" style="background-image: linear-gradient(to right, rgba(255, 255, 255, 0.105), rgba(0, 0, 0));">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between space-y-8 md:space-y-0">
+    <header class="relative overflow-hidden bg-bg-color bg-opacity-80 backdrop-blur-sm text-text-color py-20 md:py-32 border-b-2 border-primary">
+        <div class="absolute inset-0 z-0 opacity-20" style="background-image: radial-gradient(circle at center, #ffc40040, #000000 75%);"></div>
+        <div class="container mx-auto px-6 relative z-10 flex flex-col md:flex-row items-center justify-between space-y-12 md:space-y-0 md:space-x-16">
             <div class="text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white">Satyam Singh</h1>
-                <p class="mt-2 text-xl md:text-2xl text-blue-300">Aspiring Java Developer Intern</p>
-                <p class="mt-4 text-lg text-gray-400 max-w-xl">
-                    Passionate about building scalable, maintainable software solutions with a strong foundation in back-end development and a desire to learn new technologies.
+                <p class="text-2xl md:text-3xl text-primary font-bold animate-fade-in-down">Greetings, I'm</p>
+                <h1 class="text-6xl md:text-8xl font-extrabold text-primary mt-4 animate-fade-in-up" style="font-family: 'Playfair Display', serif;">Satyam Singh</h1>
+                <p class="mt-4 text-3xl md:text-4xl font-extrabold text-text-color animate-fade-in-up delay-150">Aspiring Java Developer Intern</p>
+                <p class="mt-8 text-lg leading-relaxed text-text-color max-w-2xl animate-fade-in-up delay-300">
+                    Driven by a passion for creating robust and scalable software solutions. With a strong foundation in **back-end development** and a commitment to continuous learning, I am eager to contribute my skills to challenging projects and grow as a dedicated developer.
                 </p>
-                <div class="mt-8 flex flex-wrap justify-center md:justify-start gap-4">
-                    <a href="https://www.linkedin.com/in/satyam-singh-213777301/" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center">
-                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
+                <div class="mt-12 flex flex-wrap justify-center md:justify-start gap-5 animate-fade-in-up delay-450">
+                    <a href="https://www.linkedin.com/in/satyam-singh-213777301/" target="_blank" class="bg-primary text-secondary font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center glowing-button glowing-button-primary">
+                        <i class="fab fa-linkedin-in text-lg mr-3"></i> LinkedIn
                     </a>
-                    <a href="https://github.com/satyamsingh6262" target="_blank" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center">
-                        <i class="fab fa-github mr-2"></i> GitHub
+                    <a href="https://github.com/satyamsingh6262" target="_blank" class="bg-secondary text-primary font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center glowing-button">
+                        <i class="fab fa-github text-lg mr-3"></i> GitHub
                     </a>
-                    <a href="Resume.pdf" download class="bg-gray-700 hover:bg-gray-700 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center">
-                        <i class="fa fa-file mr-2"></i> Resume
+                    <a href="Resume.pdf" download class="bg-secondary text-primary font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center glowing-button">
+                        <i class="fas fa-file-alt text-lg mr-3"></i> Resume
                     </a>
                 </div>
             </div>
-            <div class="w-40 h-40 md:w-48 md:h-48 flex-shrink-0 rounded-full overflow-hidden border-4 border-blue-600 shadow-xl transform transition-transform duration-300 hover:scale-110">
-                <img src="Profile_photo.jpg" alt="Profile Picture" class="w-full h-full object-cover">
+            <div class="w-64 h-64 md:w-80 md:h-80 flex-shrink-0 rounded-full overflow-hidden border-4 border-primary shadow-2xl transition-all duration-300 hover:scale-105 glowing-bg">
+                <div class="glowing-bg-inner w-full h-full">
+                    <img src="Profile_photo.jpg" alt="Satyam Singh Profile" class="w-full h-full object-cover">
+                </div>
             </div>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 py-16 md:py-24 space-y-24">
+    <main class="container mx-auto px-6 py-24 space-y-28">
 
-        <section id="about" class="fade-in">
-            <div class="bg-gray-800 p-8 md:p-12 rounded-xl shadow-lg transition-transform duration-300 card">
+        <section id="about" class="fade-in-section">
+            <div class="p-10 md:p-14 rounded-3xl shadow-xl transition-transform duration-300 card">
                 <h2 class="section-title">About Me</h2>
-                <p class="text-lg leading-relaxed text-gray-300">
-                    I'm an aspiring Java Developer Intern with strong programming skills in Java, object-oriented design, and back-end development. I have hands-on experience building software systems, REST APIs, and working with databases. I am passionate about building scalable, maintainable software solutions and am committed to learning and growing my skills.
+                <p class="text-lg leading-relaxed text-text-color mt-8">
+                    I am a passionate and driven **aspiring Java Developer Intern** with a robust foundation in software engineering principles and back-end development. My expertise includes building scalable and maintainable solutions, designing and implementing **REST APIs**, and working proficiently with various databases. My commitment to lifelong learning and a detail-oriented approach allows me to tackle complex challenges and deliver high-quality, efficient code. I am eager to apply my technical skills and collaborative mindset to contribute to an innovative team and make a meaningful impact.
                 </p>
             </div>
         </section>
 
-        <section id="skills" class="fade-in">
+        <section id="skills" class="fade-in-section">
             <h2 class="section-title">Technical Skills</h2>
-            <div class="bg-gray-800 p-8 md:p-12 rounded-xl shadow-lg">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="p-10 md:p-14 rounded-3xl shadow-xl bg-card-bg">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
                     <div>
-                        <h3 class="text-xl font-bold mb-4 text-blue-400">Languages</h3>
-                        <ul class="space-y-2">
-                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">Java, Python, JavaScript, SQL, HTML/CSS</li>
-                        </ul>
+                        <h3 class="text-xl font-bold mb-6 text-primary flex items-center">
+                            <i class="fas fa-code mr-3 text-2xl"></i> Programming Languages
+                        </h3>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Java</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Python</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">JavaScript</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">SQL</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">HTML/CSS</span>
+                        </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-4 text-blue-400">Libraries</h3>
-                        <ul class="space-y-2">
-                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn, React (basic)</li>
-                        </ul>
+                        <h3 class="text-xl font-bold mb-6 text-primary flex items-center">
+                            <i class="fas fa-tools mr-3 text-2xl"></i> Frameworks & Tools
+                        </h3>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Spring Boot</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Git</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Docker</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">VS Code</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">PowerBI</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Tableau</span>
+                        </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-4 text-blue-400">Tools & Platforms</h3>
-                        <ul class="space-y-2">
-                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">Git, Docker, VS Code, PowerBI, Tableau, Excel, Google BigQuery (basic)</li>
-                        </ul>
+                        <h3 class="text-xl font-bold mb-6 text-primary flex items-center">
+                            <i class="fas fa-database mr-3 text-2xl"></i> Databases
+                        </h3>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">MySQL</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">PostgreSQL</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Google BigQuery</span>
+                        </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-4 text-blue-400">Databases</h3>
-                        <ul class="space-y-2">
-                            <li class="bg-gray-700 p-3 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">MySQL, PostgreSQL</li>
-                        </ul>
+                        <h3 class="text-xl font-bold mb-6 text-primary flex items-center">
+                            <i class="fas fa-cube mr-3 text-2xl"></i> Libraries
+                        </h3>
+                        <div class="flex flex-wrap gap-4">
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Pandas</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">NumPy</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Scikit-learn</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">React (basic)</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="projects" class="fade-in">
+        <section id="projects" class="fade-in-section">
             <h2 class="section-title">Project Experience</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300 transform card">
-                    <h3 class="text-xl font-bold text-blue-400">Library Management System</h3>
-                    <p class="mt-2 text-gray-400">Java + MySQL</p>
-                    <p class="mt-4 text-gray-300">
-                        A full-stack application for managing library inventory and transactions. Implemented CRUD operations using JDBC and MySQL, and created a GUI using Swing.
-                    </p>
-                </div>
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300 transform card">
-                    <h3 class="text-xl font-bold text-blue-400">E-Commerce Website Backend</h3>
-                    <p class="mt-2 text-gray-400">Spring Boot</p>
-                    <p class="mt-4 text-gray-300">
-                        Developed a RESTful API for product, user, and order management using Spring Boot. Utilized Hibernate for ORM and MySQL for persistent storage.
-                    </p>
-                </div>
-                <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300 transform card">
-                    <h3 class="text-xl font-bold text-blue-400">Smart Fire Detection System</h3>
-                    <p class="mt-2 text-gray-400">Java + IoT</p>
-                    <p class="mt-4 text-gray-300">
-                        Created a real-time alert system using Java for device integration and SMS alerts. Integrated sensors and microcontrollers with backend alert scripts.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section id="education" class="fade-in">
-            <h2 class="section-title">Education</h2>
-            <div class="bg-gray-800 p-8 rounded-xl shadow-lg transition-transform duration-300 card">
-                <div class="flex items-start">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="p-8 rounded-3xl shadow-xl card flex flex-col justify-between">
                     <div>
-                        <h3 class="text-xl font-bold text-blue-400">Bachelor of Technology in Computer Science & Engineering</h3>
-                        <p class="mt-1 text-lg text-gray-300">Shri Ramswaroop Memorial University, Lucknow</p>
-                        <p class="mt-1 text-gray-400">Aug 2022 - Present</p>
-                        <p class="mt-1 text-gray-400">CGPA: 7.08/10</p>
+                        <h3 class="text-2xl font-bold text-primary flex items-center">
+                            <i class="fas fa-book-open mr-3"></i> Library Management System
+                        </h3>
+                        <p class="mt-2 text-text-color font-medium">Java + MySQL</p>
+                        <p class="mt-4 text-text-color">
+                            A full-stack application for managing library inventory and transactions. Implemented robust CRUD operations using JDBC and MySQL, and created a user-friendly graphical interface with Swing.
+                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <a href="https://github.com/satyamsingh6262/Library-Management-System" target="_blank" class="inline-flex items-center bg-secondary text-primary font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 glowing-button">
+                            <i class="fab fa-github mr-2"></i> Source Code
+                        </a>
+                    </div>
+                </div>
+                <div class="p-8 rounded-3xl shadow-xl card flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary flex items-center">
+                            <i class="fas fa-shopping-cart mr-3"></i> E-Commerce Backend
+                        </h3>
+                        <p class="mt-2 text-text-color font-medium">Spring Boot</p>
+                        <p class="mt-4 text-text-color">
+                            Developed a scalable RESTful API for product, user, and order management. Built using **Spring Boot**, with **Hibernate** for ORM and a **MySQL** database for persistence.
+                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <a href="https://github.com/satyamsingh6262/Ecommerce_backend-Spring_Boot" target="_blank" class="inline-flex items-center bg-secondary text-primary font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 glowing-button">
+                            <i class="fab fa-github mr-2"></i> Source Code
+                        </a>
+                    </div>
+                </div>
+                <div class="p-8 rounded-3xl shadow-xl card flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary flex items-center">
+                            <i class="fa-solid fa-face-viewfinder"></i> Face Recognition Attendance System
+                        </h3>
+                        <p class="mt-2 text-text-color font-medium">Python</p>
+                        <p class="mt-4 text-text-color">
+                            An automated method of tracking employee attendance using facial recognition technology. This system captures an individual's facial image, compares it to a database of known faces, and records attendance based on a match</p>
+                    </div>
+                    <div class="mt-8">
+                        <a href="https://github.com/satyamsingh6262/Face-Recognition-Attendance-System" target="_blank" class="inline-flex items-center bg-secondary text-primary font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 glowing-button">
+                            <i class="fab fa-github mr-2"></i> Source Code
+                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="certifications" class="fade-in">
+        <section id="education" class="fade-in-section">
+            <h2 class="section-title">Education</h2>
+            <div class="p-10 rounded-3xl shadow-xl card">
+                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary flex items-center">
+                            <i class="fas fa-graduation-cap mr-3"></i> Bachelor of Technology in Computer Science & Engineering
+                        </h3>
+                        <p class="mt-1 text-lg text-text-color">Shri Ramswaroop Memorial University, Lucknow</p>
+                        <p class="mt-2 text-text-color">Aug 2022 - Present</p>
+                    </div>
+                    <div class="mt-6 md:mt-0 text-left md:text-right">
+                        <p class="text-xl font-bold text-primary">CGPA: <span class="text-primary">7.08/10</span></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="fade-in-section">
             <h2 class="section-title">Certifications</h2>
-            <div class="bg-gray-800 p-8 rounded-xl shadow-lg">
-                <ul class="space-y-4">
-                    <li class="bg-gray-700 p-4 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">
-                        <h3 class="text-lg font-bold text-blue-400">Power BI - Microsoft</h3>
-                        <p class="text-gray-400">Issued: Jul 2024</p>
-                    </li>
-                    <li class="bg-gray-700 p-4 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">
-                        <h3 class="text-lg font-bold text-blue-400">Walmart Advanced software engineering Job Simulation</h3>
-                        <p class="text-gray-400">Issued: April 2025</p>
-                    </li>
-                    <li class="bg-gray-700 p-4 rounded-lg shadow transition-colors duration-200 hover:bg-gray-600">
-                        <h3 class="text-lg font-bold text-blue-400">Sky Scanner Front-End Software Engineering Job Simulation</h3>
-                        <p class="text-gray-400">Issued: April 2025</p>
-                    </li>
+            <div class="p-10 rounded-3xl shadow-xl bg-card-bg">
+                <ul class="space-y-6">
+                    <li class="bg-secondary p-6 rounded-xl shadow-md transition-all duration-300 flex items-center justify-between glowing-button">
+                            <div>
+                            <h3 class="text-lg font-bold text-primary">Power BI - Microsoft</h3>
+                            <p class="text-text-color mt-1">Issued: July 2024</p>
+                        </div>
+                        <i class="fas fa-award text-primary text-3xl"></i>
+                    </li><a href="Walmart.pdf">
+                    <li class="bg-secondary p-6 rounded-xl shadow-md transition-all duration-300 flex items-center justify-between glowing-button">
+                        <div>
+                            <h3 class="text-lg font-bold text-primary">Walmart Advanced Software Engineering Job Simulation</h3>
+                            <p class="text-text-color mt-1">Issued: April 2025</p>
+                        </div>
+                        <i class="fas fa-award text-primary text-3xl"></i>
+                    </li></a><a href="Skyscanner.pdf">
+                    <li class="bg-secondary p-6 rounded-xl shadow-md transition-all duration-300 flex items-center justify-between glowing-button">
+                        <div>
+                            <h3 class="text-lg font-bold text-primary">Skyscanner Front-End Software Engineering Job Simulation</h3>
+                            <p class="text-text-color mt-1">Issued: April 2025</p>
+                        </div>
+                        <i class="fas fa-award text-primary text-3xl"></i>
+                    </li></a>
                 </ul>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-8 text-center">
-        <h1 class="text-gray-300 hover:text-blue-400 transition-colors duration-300 hover:scale-110">Feel Free to Contact</h1>
-        <p class="hover:scale-110">Email: satyamsingh62jnp@gmail.com | Phone: +91 7398410701</p>
+    <footer class="bg-secondary text-text-color py-12 text-center border-t-2 border-primary">
+        <h3 class="text-2xl font-bold text-primary mb-2" style="font-family: 'Playfair Display', serif;">GET IN TOUCH</h3>
+        <p class="mb-4 text-text-color">I'm currently open to new opportunities. Let's connect!</p>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-lg">
+            <a href="mailto:satyamsingh62jnp@gmail.com" class="hover:text-primary transition-colors duration-300 transform hover:scale-105 flex items-center">
+                <i class="fas fa-envelope mr-2"></i> satyamsingh62jnp@gmail.com
+            </a>
+            <a href="tel:+917398410701" class="hover:text-primary transition-colors duration-300 transform hover:scale-105 flex items-center">
+                <i class="fas fa-phone-alt mr-2"></i> +91 7398410701
+            </a>
+        </div>
+        <div class="mt-8">
+            <p class="text-sm">Designed & Developed by Satyam Singh. All Rights Reserved.</p>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
+        // Particle.js animation script for golden theme
+        (function() {
+            var canvas = document.getElementById('particle-canvas');
+            var ctx = canvas.getContext('2d');
+            var particles = [];
+            var particleCount = 100; // Increased particle count for more density
+            var width, height;
+
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+
+            function Particle() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.7; // Slightly faster movement
+                this.vy = (Math.random() - 0.5) * 0.7; // Slightly faster movement
+                this.radius = Math.random() * 1.2;
+                this.color = 'rgba(255, 196, 0, 0.7)'; // More vibrant golden color
+            }
+
+            function createParticles() {
+                particles = [];
+                for (var i = 0; i < particleCount; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+
+                for (var i = 0; i < particleCount; i++) {
+                    var p1 = particles[i];
+
+                    ctx.beginPath();
+                    ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2, false);
+                    ctx.fillStyle = p1.color;
+                    ctx.fill();
+
+                    // Update position
+                    p1.x += p1.vx;
+                    p1.y += p1.vy;
+
+                    // Bounce off walls
+                    if (p1.x < 0 || p1.x > width) p1.vx *= -1;
+                    if (p1.y < 0 || p1.y > height) p1.vy *= -1;
+
+                    // Draw lines to nearby particles
+                    for (var j = i + 1; j < particleCount; j++) {
+                        var p2 = particles[j];
+                        var distance = Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2));
+
+                        if (distance < 140) { // Increased line connection distance
+                            ctx.beginPath();
+                            ctx.moveTo(p1.x, p1.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = 'rgba(255, 196, 0, ' + (1 - distance / 140) * 0.25 + ')';
+                            ctx.lineWidth = 1.5; // Thicker lines
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(draw);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            createParticles();
+            draw();
+        })();
+
+
         // Toggle mobile menu
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -230,26 +497,35 @@
             mobileMenu.classList.toggle('hidden');
         });
 
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
         // Intersection Observer for fade-in effect on scroll
-        const faders = document.querySelectorAll('.fade-in');
-        const appearOptions = {
-            threshold: 0.2
+        const sections = document.querySelectorAll('.fade-in-section');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
         };
 
-        const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+        const observer = new IntersectionObserver((entries, observer) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add('show');
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
                     observer.unobserve(entry.target);
                 }
             });
-        }, appearOptions);
+        }, observerOptions);
 
-        faders.forEach(fader => {
-            appearOnScroll.observe(fader);
+        sections.forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
+
 </html>
