@@ -168,6 +168,12 @@
                 transform: scale(0.95);
             }
         }
+        .project-item img {
+              width: 100%; /* Makes the image responsive and fill the container */
+              height: auto; /* Maintains the aspect ratio */
+              border-radius: 8px; /* Optional: Adds rounded corners for a modern look */
+              margin-bottom: 15px; /* Adds space between the image and the text */
+}
     </style>
 </head>
 
@@ -209,7 +215,7 @@
             <div class="text-center md:text-left">
                 <p class="text-2xl md:text-3xl text-primary font-bold animate-fade-in-down">Greetings, I'm</p>
                 <h1 class="text-6xl md:text-8xl font-extrabold text-primary mt-4 animate-fade-in-up" style="font-family: 'Playfair Display', serif;">Satyam Singh</h1>
-                <p class="mt-4 text-3xl md:text-4xl font-extrabold text-text-color animate-fade-in-up delay-150">Aspiring Java Developer Intern</p>
+                <p class="mt-4 text-3xl md:text-4xl font-extrabold text-text-color animate-fade-in-up delay-150">Enthusiastic Java Developer|Seeking Internship</p>
                 <p class="mt-8 text-lg leading-relaxed text-text-color max-w-2xl animate-fade-in-up delay-300">
                     Driven by a passion for creating robust and scalable software solutions. With a strong foundation in back-end development and a commitment to continuous learning, I am eager to contribute my skills to challenging projects and grow as a dedicated developer.
                 </p>
@@ -220,14 +226,14 @@
                     <a href="https://github.com/satyamsingh6262" target="_blank" class="bg-secondary text-primary font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center glowing-button">
                         <i class="fab fa-github text-lg mr-3"></i> GitHub
                     </a>
-                    <a href="Resume.pdf" download class="bg-secondary text-primary font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center glowing-button">
+                    <a href="f/Resume.pdf" download class="bg-secondary text-primary font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 flex items-center glowing-button">
                         <i class="fas fa-file-alt text-lg mr-3"></i> Resume
                     </a>
                 </div>
             </div>
             <div class="w-64 h-64 md:w-80 md:h-80 flex-shrink-0 rounded-full overflow-hidden border-4 border-primary shadow-2xl transition-all duration-300 hover:scale-105 glowing-bg">
                 <div class="glowing-bg-inner w-full h-full">
-                    <img src="Profile_photo.jpg" alt="Satyam Singh Profile" class="w-full h-full object-cover">
+                    <img src="f/Profile_photo.jpg" alt="Satyam Singh Profile" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -291,7 +297,7 @@
                             <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Pandas</span>
                             <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">NumPy</span>
                             <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">Scikit-learn</span>
-                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">React (basic)</span>
+                            <span class="skill-badge px-5 py-2 rounded-full text-sm font-medium">React (foundational knowledge)</span>
                         </div>
                     </div>
                 </div>
@@ -302,46 +308,46 @@
             <h2 class="section-title">Project Experience</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div class="p-8 rounded-3xl shadow-xl card flex flex-col justify-between">
-                    <div>
+                    <div class="project-item rounded-3xl shadow-xl card flex flex-col ">
+                        <img src="f/lib.png" alt="Screenshot of the Library Management System"></div>
                         <h3 class="text-2xl font-bold text-primary flex items-center">
-                            <i class="fas fa-book-open mr-3"></i> Library Management System
+                        <i class="fas fa-book-open mr-3"></i> Library Management System
                         </h3>
                         <p class="mt-2 text-text-color font-medium">Java + MySQL</p>
                         <p class="mt-4 text-text-color">
-                            A full-stack application for managing library inventory and transactions. Implemented robust CRUD operations using JDBC and MySQL, and created a user-friendly graphical interface with Swing.
-                        </p>
-                    </div>
+                         A Java-based desktop application for library management. I implemented a robust back-end using JDBC and MySQL to handle inventory and transactions, and designed a user-friendly GUI with Swing for a seamless user experience.</p>
+                
                     <div class="mt-8">
                         <a href="https://github.com/satyamsingh6262/Library-Management-System" target="_blank" class="inline-flex items-center bg-secondary text-primary font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 glowing-button">
                             <i class="fab fa-github mr-2"></i> Source Code
                         </a>
                     </div>
                 </div>
-                <div class="p-8 rounded-3xl shadow-xl card flex flex-col justify-between">
-                    <div>
+                 <div class="p-8 rounded-3xl shadow-xl card flex flex-col justify-between">
+                    <div class="p-1 project-item rounded-3xl shadow-xl card flex flex-col">
+                        <img src="f/ee.png" alt="Screenshot of the Library Management System"></div>
                         <h3 class="text-2xl font-bold text-primary flex items-center">
                             <i class="fas fa-shopping-cart mr-3"></i> E-Commerce Backend
                         </h3>
                         <p class="mt-2 text-text-color font-medium">Spring Boot</p>
                         <p class="mt-4 text-text-color">
-                            Developed a scalable RESTful API for product, user, and order management. Built using Spring Boot, with Hibernate for ORM and a MySQL database for persistence.
-                        </p>
-                    </div>
+                     A scalable RESTful API for an e-commerce platform built with Spring Boot. I used Hibernate as an ORM to manage data persistence in a MySQL database, demonstrating my ability to develop efficient and secure back-end systems.                        </p>
+                
                     <div class="mt-8">
                         <a href="https://github.com/satyamsingh6262/Ecommerce_backend-Spring_Boot" target="_blank" class="inline-flex items-center bg-secondary text-primary font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 glowing-button">
                             <i class="fab fa-github mr-2"></i> Source Code
                         </a>
                     </div>
                 </div>
-                <div class="p-8 rounded-3xl shadow-xl card flex flex-col justify-between">
-                    <div>
+                <div class="p-7 rounded-3xl shadow-xl card flex flex-col justify-between">
+                    <div class="project-item rounded-3xl shadow-xl card flex flex-col">
+                        <img src="f/face.png" alt="Screenshot of Face Recognition Attendance System"></div>
                         <h3 class="text-2xl font-bold text-primary flex items-center">
-                            <i class="fa-solid fa-face-viewfinder"></i> Face Recognition Attendance System
+                            <i class="fa-solid fa-face-viewfinder mr-3"></i> Face Recognition Attendance System
                         </h3>
                         <p class="mt-2 text-text-color font-medium">Python</p>
                         <p class="mt-4 text-text-color">
-                            An automated method of tracking employee attendance using facial recognition technology. This system captures an individual's facial image, compares it to a database of known faces, and records attendance based on a match</p>
-                    </div>
+                      An automated attendance system developed in Python using facial recognition technology. The application captures and compares facial data to a database to accurately record attendance, showcasing my skills in computer vision and process automation.              
                     <div class="mt-8">
                         <a href="https://github.com/satyamsingh6262/Face-Recognition-Attendance-System" target="_blank" class="inline-flex items-center bg-secondary text-primary font-bold py-3 px-6 rounded-full transition-all duration-300 transform hover:scale-105 glowing-button">
                             <i class="fab fa-github mr-2"></i> Source Code
@@ -353,25 +359,37 @@
         <section id="certifications" class="fade-in-section">
             <h2 class="section-title">Certifications</h2>
             <div class="p-10 rounded-3xl shadow-xl bg-card-bg">
-                <ul class="space-y-6">
+                <ul class="space-y-6"><a href="f/jp.pdf">
                     <li class="bg-secondary p-6 rounded-xl shadow-md transition-all duration-300 flex items-center justify-between glowing-button">
-                            <div>
-                            <h3 class="text-lg font-bold text-primary">Power BI - Microsoft</h3>
-                            <p class="text-text-color mt-1">Issued: July 2024</p>
+                            <div><img src="f/jp.png"  width="70" height="30">
+                            <h3 class="text-lg font-bold text-primary">JP Morgan Chase & Co.</h3>
+                            <p class="text-text-color mt-1">Issued: August,2025</p>
                         </div>
                         <i class="fas fa-award text-primary text-3xl"></i>
-                    </li><a href="Walmart.pdf">
+                    </li></a><a href="f/Walmart.pdf">
                     <li class="bg-secondary p-6 rounded-xl shadow-md transition-all duration-300 flex items-center justify-between glowing-button">
                         <div>
-                            <h3 class="text-lg font-bold text-primary">Walmart Advanced Software Engineering Job Simulation</h3>
+                            <img src="f/apple-touch-icon.png"  width="30" height="30">
+                            <h3 class="text-lg font-bold text-primary">
+                                Walmart Advanced Software Engineering Job Simulation</h3>
                             <p class="text-text-color mt-1">Issued: April 2025</p>
                         </div>
                         <i class="fas fa-award text-primary text-3xl"></i>
-                    </li></a><a href="Skyscanner.pdf">
+                    </li></a><a href="f/Skyscanner.pdf">
                     <li class="bg-secondary p-6 rounded-xl shadow-md transition-all duration-300 flex items-center justify-between glowing-button">
                         <div>
+                            <img src="f/ss.png"  width="40" height="40">
                             <h3 class="text-lg font-bold text-primary">Skyscanner Front-End Software Engineering Job Simulation</h3>
                             <p class="text-text-color mt-1">Issued: April 2025</p>
+                        </div>
+                        <i class="fas fa-award text-primary text-3xl"></i>
+                    </li></a>
+                    <a href="f/accenture.pdf">
+                    <li class="bg-secondary p-6 rounded-xl shadow-md transition-all duration-300 flex items-center justify-between glowing-button">
+                        <div>
+                            <img src="f\accenture.png"  width="70" height="40">
+                            <h3 class="text-lg font-bold text-primary">Accenture Developer and Technology Job Simulation</h3>
+                            <p class="text-text-color mt-1">Issued: August,2025</p>
                         </div>
                         <i class="fas fa-award text-primary text-3xl"></i>
                     </li></a>
@@ -510,5 +528,6 @@
 </body>
 
 </html>
+
 
 
